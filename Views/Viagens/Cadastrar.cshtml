@@ -1,0 +1,112 @@
+﻿@model BusControl.ViewModels.ViagensViewModel
+
+@{
+    ViewData["Title"] = "Cadastrar Viagem";
+}
+
+<div class="container mt-5">
+
+    <div class="card shadow-lg border-0">
+
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">
+                🚌 Cadastro de Viagem
+            </h3>
+        </div>
+
+        <div class="card-body">
+
+            <form method="post"
+                  asp-controller="Viagens"
+                  asp-action="Cadastrar">
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="nomeMotorista" class="form-label fw-bold"> Motorista </label>
+                        <input maxlength="100" asp-for="nomeMotorista" class="form-control" placeholder="Digite o nome do motorista" />
+                        <span asp-validation-for="nomeMotorista" class="text-danger"></span>
+                              
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="nomeOnibus" class="form-label fw-bold"> Ônibus </label>
+                        <input maxlength="50" asp-for="nomeOnibus" class="form-control" placeholder="Digite o nome do ônibus" />
+                        <span asp-validation-for="nomeOnibus" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="quantidadePassageiros" class="form-label fw-bold">  Quantidade de Passageiros </label>
+                        
+                        <input maxlength="5" asp-for="quantidadePassageiros" type="text" class="form-control somenteNumero" />
+                        
+                        <span asp-validation-for="quantidadePassageiros" class="text-danger"></span>
+                              
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="rotaViagem" class="form-label fw-bold"> Rota </label>
+                        <input maxlength="5" asp-for="rotaViagem" type="text" class="form-control somenteNumero" />
+                        <span asp-validation-for="rotaViagem" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="destinoViagem" class="form-label fw-bold"> Destino </label>
+                        <input maxlength="50" asp-for="destinoViagem" class="form-control" placeholder="Digite o destino" />
+                        <span asp-validation-for="destinoViagem" class="text-danger"></span>
+                              
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="valorViagem" class="form-label fw-bold"> Valor da Passagem </label>
+                        <input maxlength="10" asp-for="valorViagem" type="text" class="form-control dinheiro" />
+                        <span asp-validation-for="valorViagem" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="diaHoraSaida"
+                               class="form-label fw-bold">
+                            Data/Hora de Saída
+                        </label>
+
+                        <input asp-for="diaHoraSaida"
+                               type="datetime-local"
+                               class="form-control" />
+
+                        <span asp-validation-for="diaHoraSaida"
+                              class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="diaHoraChegada"
+                               class="form-label fw-bold">
+                            Data/Hora de Chegada
+                        </label>
+
+                        <input asp-for="diaHoraChegada" type="datetime-local" class="form-control" />  
+                        <span asp-validation-for="diaHoraChegada" class="text-danger"></span>
+                              
+                    </div>
+
+                </div>
+
+                <hr />
+
+                <div class="d-flex justify-content-end gap-3">
+                    <a asp-controller="Viagens" asp-action="Index" class="btn btn-secondary px-4"> Voltar </a>
+                    <button type="submit" class="btn btn-success px-4"> Salvar Viagem </button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts
+{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
+    <script src="~/js/funcoes.js"></script>
+}

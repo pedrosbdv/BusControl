@@ -1,0 +1,181 @@
+﻿@model IEnumerable<ViagensModel>
+
+<div class="container mt-4">
+
+    <div class="card shadow-lg">
+
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h3 class="mb-0">🚌 Controle de Viagens</h3>
+
+            <a asp-controller="Viagens"
+               asp-action="Cadastrar"
+               class="btn btn-success">
+                + Nova Viagem
+            </a>
+        </div>
+
+        <div class="card-body">
+
+            <form method="get" asp-action="Index">
+
+                <div class="row mb-4">
+
+                    <div class="col-md-4">
+                        <label class="form-label fw-bold">
+                            Motorista
+                        </label>
+
+                        <input type="text"
+                               name="motorista"
+                               value="@ViewBag.Motorista"
+                               class="form-control"
+                               placeholder="Pesquisar motorista..." />
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label fw-bold">
+                            Rota
+                        </label>
+
+                        <input type="text"
+                               name="rota"
+                               value="@ViewBag.Rota"
+                               class="form-control"
+                               placeholder="Pesquisar rota..." />
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label fw-bold">
+                            Destino
+                        </label>
+
+                        <input type="text"
+                               name="destino"
+                               value="@ViewBag.Destino"
+                               class="form-control"
+                               placeholder="Pesquisar destino..." />
+                    </div>
+
+                </div>
+
+                <div class="mb-4">
+
+                    <button type="submit"
+                            class="btn btn-primary">
+                        Pesquisar
+                    </button>
+
+                    <a asp-action="Index"
+                       class="btn btn-secondary">
+                        Limpar
+                    </a>
+
+                </div>
+
+            </form>
+
+            <div class="table-responsive">
+
+                <table class="table table-hover table-bordered align-middle">
+
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Motorista</th>
+                            <th>Passageiros</th>
+                            <th>Ônibus</th>
+                            <th>Rota</th>
+                            <th>Destino</th>
+                            <th>Valor</th>
+                            <th>Saída</th>
+                            <th>Chegada</th>
+                            <th>Lucro</th>
+                            <th width="180">Ações</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @if (Model != null && Model.Any())
+                        {
+                            @foreach (var viagem in Model)
+                            {
+                                <tr>
+
+                                    <td>@viagem.nomeMotorista</td>
+
+                                    <td>
+                                        <span class="badge bg-primary">
+                                            @viagem.quantidadePassageiros
+                                        </span>
+                                    </td>
+
+                                    <td>@viagem.nomeOnibus</td>
+
+                                    <td>@viagem.rotaViagem</td>
+
+                                    <td>@viagem.destinoViagem</td>
+
+                                    <td>
+                                        @viagem.valorViagem.ToString("C")
+                                    </td>
+
+                                    <td>
+                                        @viagem.diaHoraSaida
+                                    </td>
+
+                                    <td>
+                                        @viagem.diaHoraChegada
+                                    </td>
+
+                                    <td>
+                                        <span class="text-success fw-bold">
+                                            @((viagem.valorViagem * viagem.quantidadePassageiros).ToString("C"))
+                                        </span>
+                                    </td>
+
+                                    <td>
+
+                                        <a asp-controller="Viagens"
+                                           asp-action="Editar"
+                                           asp-route-id="@viagem.id"
+                                           class="btn btn-warning btn-sm">
+                                            Editar
+                                        </a>
+
+                                        <button type="button"
+                                                class="btn btn-danger btn-sm btnExcluir"
+                                                data-id="@viagem.id">
+                                            Excluir
+                                        </button>
+
+                                    </td>
+
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="10" class="text-center">
+                                    Nenhuma viagem encontrada.
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts
+{
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="~/js/index.js"></script>
+}
