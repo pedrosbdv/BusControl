@@ -51,7 +51,7 @@ Funcionalidades planejadas para futuras versões:
 
 Segue algumas telas feitas
 
-<img width="899" height="155" alt="Captura de tela 2026-06-07 192522" src="https://github.com/user-attachments/assets/60397e7e-e8e3-4559-a981-e337bc26258a" />
+
 <img width="493" height="613" alt="Captura de tela 2026-06-07 233613" src="https://github.com/user-attachments/assets/2b575c31-23ea-4042-97f7-4518361ccf91" />
 <img width="491" height="614" alt="Captura de tela 2026-06-07 233604" src="https://github.com/user-attachments/assets/7e43fb36-3ac0-4e12-a1ca-c1a3f8c8034a" />
 <img width="1919" height="994" alt="Captura de tela 2026-06-07 233525" src="https://github.com/user-attachments/assets/6029cd48-9222-4066-945b-edef3fd1b05e" />
