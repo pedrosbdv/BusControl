@@ -1,0 +1,144 @@
+﻿@using BusControl.Dto
+@using BusControl.Models
+@model IEnumerable<MotoristaModel>
+
+@{
+    var status = ViewBag.Status?.ToString();
+    bool IsSelected(string value) => status == value;
+}
+
+<div class="card">
+
+    <div class="chd">
+        <div class="ctitle">
+            <div class="cico">🪪</div>
+            Consulta de Motoristas
+        </div>
+    </div>
+
+    <form method="get" asp-action="Index" asp-controller="Motorista">
+
+        <div class="filter-grid">
+
+            <div class="field">
+                <label>Nome do Motorista</label>
+                <input value="@ViewBag.Motorista" type="text" name="nomeMotorista" placeholder="Digite o nome..." />
+            </div>
+
+            <div class="field">
+                <label>Status</label>
+                <select name="status">
+
+                    <option value="" selected="@(string.IsNullOrEmpty(status))">Todos</option>
+                    <option value="1" selected="@(IsSelected("1"))">Ativo</option>
+                    <option value="2" selected="@(IsSelected("2"))">Férias</option>
+                    <option value="3" selected="@(IsSelected("3"))">Afastado</option>
+                    <option value="4" selected="@(IsSelected("4"))">Inativo</option>
+
+                </select>
+            </div>
+
+        </div>
+
+        <div class="actions-bar">
+
+            <button type="submit" class="btn btn-p">
+                🔍 Pesquisar
+            </button>
+
+            <button type="button"
+                    class="btn btn-p"
+                    onclick="abrirModalMotorista()">
+                ➕ Novo Motorista
+            </button>
+
+            <button type="button"
+                    class="btn btn-g"
+                    onclick="limparFiltros()">
+                🧹 Limpar
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+<div class="card">
+
+    <div class="table-wrap">
+
+        <table class="tbl">
+
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Data Nascimento</th>
+                    <th>Status</th>
+                    <th class="text-center">Ações</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @if (Model != null && Model.Any())
+                {
+                    @foreach (var motorista in Model)
+                    {
+                        <tr>
+
+                            <td>@motorista.Nome</td>
+                            <td>@motorista.Email</td>
+                            <td>@motorista.DataNascimento</td>
+                            <td>@motorista.Status</td>
+
+                            <td>
+                                <div class="table-actions">
+                                    <button class="action-btn edit">
+                                        ✏️
+                                    </button>
+
+                                    <button type="button" class="action-btn delete" onclick="ExcluirMotorista(@motorista.id)">
+                                        🗑️
+                                    </button>
+                                </div>
+
+                            </td>
+
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="10" class="text-center">
+                            Nenhuma viagem encontrada.
+                        </td>
+                    </tr>
+                }
+
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+
+
+@section Scripts
+{
+
+    <script src="~/js/motorista.js"></script>
+}
+
+@await Html.PartialAsync("_ModalCadastrarMotorista", new MotoristaRegisterDto())
+
+    
+    
+
+

@@ -1,0 +1,98 @@
+﻿@using BusControl.Models
+@model IEnumerable<MotoristaModel>
+
+<div class="card">
+
+    <div class="chd">
+        <div class="ctitle">
+            <div class="cico">🪪</div>
+            Histórico de Motoristas
+        </div>
+    </div>
+
+    <form method="get" asp-action="ConsultarMotoristasComViagens" asp-controller="Motorista">
+
+        <div class="filter-grid">
+
+            <div class="field">
+                <label>Nome do Motorista</label>
+                <input value="@ViewBag.Motorista" type="text" name="nome" />
+            </div>
+
+        </div>
+
+        <div class="actions-bar">
+            <button type="submit" class="btn btn-p">🔍 Pesquisar</button>
+            <button type="button" class="btn btn-g">🧹 Limpar</button>
+        </div>
+
+    </form>
+
+</div>
+
+<br />
+
+@if (Model != null && Model.Any())
+{
+    @foreach (var motorista in Model)
+    {
+        <div class="card" style="margin-bottom:20px; padding:15px;">
+
+            <!-- MOTORISTA -->
+            <h3>👨‍✈️ @motorista.Nome</h3>
+            <p>📧 @motorista.Email | Status: @motorista.Status</p>
+
+            <hr />
+
+            <!-- VIAGENS -->
+            <strong>Histórico de Viagens</strong>
+
+            @if (motorista.Viagens != null && motorista.Viagens.Any())
+            {
+                <div class="table-wrap" style="margin-top:10px;">
+
+                    <table class="tbl">
+
+                        <thead>
+                            <tr>
+                                <th>Destino</th>
+                                <th>Passageiros</th>
+                                <th>Veículo</th>
+                                <th>Paradas</th>
+                                <th>Valor</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var viagem in motorista.Viagens)
+                            {
+                                <tr>
+                                    <td style="text-align:center;">@viagem.destino</td>
+                                    <td style="text-align:center;">@viagem.quantidadePassageiros</td>
+                                    <td style="text-align:center;">@viagem.veiculo?.nomeVeiculo</td>
+                                    <td style="text-align:center;">@viagem.quantidadeParadas</td>
+                                    <td style="text-align:center;">R$ @(viagem.valorViagem.HasValue ? viagem.valorViagem.Value.ToString("N2") : "0,00")</td>
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+            }
+            else
+            {
+                <p style="margin-top:10px;">Sem viagens registradas</p>
+            }
+
+        </div>
+    }
+}
+else
+{
+    <div class="card">
+        <p class="text-center">Nenhum motorista encontrado</p>
+    </div>
+}

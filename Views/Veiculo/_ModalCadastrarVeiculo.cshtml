@@ -1,0 +1,79 @@
+﻿@model BusControl.Dto.VeiculoRegisterDto
+
+<div id="modalMotorista" class="modal-overlay">
+
+    <div class="modal-custom">
+
+        <div class="modal-header-custom">
+
+            <h3>🪪 Cadastro de Veiculo</h3>
+
+            <button type="button"
+                    class="close-modal"
+                    onclick="fecharModalVeiculo()">
+                ✕
+            </button>
+
+        </div>
+
+        <form id="formVeiculo">
+
+              
+              
+            <div class="modal-body-custom">
+
+                <div class="form-grid">
+
+                    <div class="field">
+                        <label>Nome *</label>
+                        <input type="text" asp-for="placaVeiculo" name="placaVeiculo" />
+
+                    </div>
+
+                    <div class="field">
+                        <label>Nome *</label>
+                        <input type="text" asp-for="nomeVeiculo" name="nomeVeiculo" />
+
+                    </div>
+
+                    <div class="field">
+                        <label>Marca *</label>
+                        <input type="text" asp-for="marcaVeiculo" name="marcaVeiculo" />
+
+                    </div>
+
+                    <div class="field">
+                        <label>Categoria</label>
+                        <select asp-for="categoria" name="Categoria">
+                            <option value="1">Luxo</option>
+                            <option value="2">Normal</option>
+
+                        </select>
+
+                        
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer-custom">
+
+                <button type="button"
+                        class="btn btn-g"
+                        onclick="fecharModalVeiculo()">
+                    Cancelar
+                </button>
+
+                <button type="button" class="btn btn-p" onclick="cadastrarVeiculo()">
+                    Salvar
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+

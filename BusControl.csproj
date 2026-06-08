@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\js\index.js" />
+    <None Include="wwwroot\js\viagens.js" />
   </ItemGroup>
 
   <ItemGroup>

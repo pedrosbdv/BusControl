@@ -4,6 +4,7 @@ using BusControl.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BusControl.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260607051348_AlterarStatusMotorista")]
+    partial class AlterarStatusMotorista
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -120,9 +123,8 @@ namespace BusControl.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("motoristaId")
-                        .HasColumnType("int")
-                        .HasColumnName("motorista");
+                    b.Property<int>("motorista")
+                        .HasColumnType("int");
 
                     b.Property<int>("quantidadeParadas")
                         .HasColumnType("int");
@@ -133,36 +135,12 @@ namespace BusControl.Migrations
                     b.Property<decimal>("valorViagem")
                         .HasColumnType("decimal(65,30)");
 
-                    b.Property<int>("veiculoId")
-                        .HasColumnType("int")
-                        .HasColumnName("veiculo");
+                    b.Property<int>("veiculo")
+                        .HasColumnType("int");
 
                     b.HasKey("id");
 
-                    b.HasIndex("motoristaId");
-
-                    b.HasIndex("veiculoId");
-
                     b.ToTable("Viagens");
-                });
-
-            modelBuilder.Entity("BusControl.Models.ViagemModel", b =>
-                {
-                    b.HasOne("BusControl.Models.MotoristaModel", "motorista")
-                        .WithMany()
-                        .HasForeignKey("motoristaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BusControl.Models.VeiculoModel", "veiculo")
-                        .WithMany()
-                        .HasForeignKey("veiculoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("motorista");
-
-                    b.Navigation("veiculo");
                 });
 #pragma warning restore 612, 618
         }

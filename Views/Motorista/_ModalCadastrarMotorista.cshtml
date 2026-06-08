@@ -1,0 +1,80 @@
+﻿@model BusControl.Dto.MotoristaRegisterDto
+
+<div id="modalMotorista" class="modal-overlay">
+
+    <div class="modal-custom">
+
+        <div class="modal-header-custom">
+
+            <h3>🪪 Cadastro de Motorista</h3>
+
+            <button type="button"
+                    class="close-modal"
+                    onclick="fecharModalMotorista()">
+                ✕
+            </button>
+
+        </div>
+
+        <form id="formMotorista">
+
+              
+              
+            <div class="modal-body-custom">
+
+                <div class="form-grid">
+
+                    <div class="field">
+                        <label>Nome</label>
+                        <input type="text" asp-for="Nome" name="Nome" />
+
+                    </div>
+
+                    <div class="field">
+                        <label>Email</label>
+                        <input type="email" asp-for="Email" name="Email" />
+
+                    </div>
+
+                    <div class="field">
+                        <label>Data Nascimento</label>
+                        <input type="date" asp-for="DataNascimento" name="DataNascimento" />
+
+                    </div>
+
+                    <div class="field">
+                        <label>Status</label>
+                        <select asp-for="Status" name="Status">
+                            <option value="1">Ativo</option>
+                            <option value="2">Férias</option>
+                            <option value="3">Afastado</option>
+                            <option value="4">Inativo</option>
+                        </select>
+
+                        
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer-custom">
+
+                <button type="button"
+                        class="btn btn-g"
+                        onclick="fecharModalMotorista()">
+                    Cancelar
+                </button>
+
+                <button type="button" class="btn btn-p" onclick="cadastrarMotorista()">
+                    Salvar
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+

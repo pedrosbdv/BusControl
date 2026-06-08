@@ -1,0 +1,98 @@
+﻿@model BusControl.Dto.ViagensRegisterDto
+
+<div id="modalViagens" class="modal-overlay">
+
+    <div class="modal-custom">
+
+        <div class="modal-header-custom">
+
+            <h3>🪪 Cadastro de Viagens</h3>
+
+            <button type="button"
+                    class="close-modal"
+                    onclick="fecharModalViagens()">
+                ✕
+            </button>
+
+        </div>
+
+        <form id="formViagens">
+
+              
+              
+            <div class="modal-body-custom">
+
+                <div class="form-grid">
+
+                    <div class="field">
+                        <label>Destino *</label>
+                        <input type="text" asp-for="destino" id="destino" name="destino" />
+
+                    </div>
+
+                    <div class="field">
+                        <label>Nome do motorista *</label>
+                        <select name="motoristaId" asp-for="motoristaId" class="form-select">
+                            <option value="">Selecione o motorista</option>
+                            @foreach (var motorista in ViewBag.Motoristas)
+                            {
+                                <option value="@motorista.id">@motorista.Nome</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Veiculo *</label>
+                        <select name="veiculoId" asp-for="veiculoId" class="form-select">
+                            <option value="">Selecione o veículo</option>
+
+                            @foreach (var veiculo in ViewBag.Veiculos)
+                            {
+                                <option value="@veiculo.id">@veiculo.nomeVeiculo</option>
+                            }
+                        </select>
+
+                    </div>
+
+                    <div class="field">
+                        <label>Quantidade de passageiros *</label>
+                        <input type="text" class="somenteNumero" asp-for="quantidadePassageiros" name="quantidadePassageiros" />
+
+                    </div>
+
+                    <div class="field">
+                        <label>Quantidade de paradas *</label>
+                        <input type="text" class="somenteNumero" asp-for="quantidadeParadas" name="quantidadeParadas" />
+
+                    </div>
+
+                    <div class="field">
+                        <label>Valor da viagem *</label>
+                        <input type="text" class="dinheiro" asp-for="valorViagem" name="valorViagem" />
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer-custom">
+
+                <button type="button"
+                        class="btn btn-g"
+                        onclick="fecharModalViagens()">
+                    Cancelar
+                </button>
+
+                <button type="button" class="btn btn-p" onclick="cadastrarViagens()">
+                    Salvar
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+

@@ -1,43 +1,124 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - BusControl</title>
-    <script type="importmap"></script>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/BusControl.styles.css" asp-append-version="true" />
-</head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BusControl</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Viagens" asp-action="Index">Viagens</a>
-                        </li>
-                    </ul>
+
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"] - BusControl</title>
+        <script type="importmap"></script>
+    
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    
+    </head>
+    <body>
+    
+        <div id="ov" onclick="closeMob()"></div>
+
+        <!-- SIDEBAR -->
+        <aside class="sb" id="sb">
+            <div class="brand">
+                <div class="brand-ico">🚌</div>
+                <div class="brand-txt">bus<em>Control</em></div>
+            </div>
+
+            <nav class="nav">
+                <div class="nav-gl">Gestão</div>
+
+                <div class="ni" id="ni1" onclick="tog(this,'sm1')">
+                    <div class="niw"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" /><path d="M6 20v-2a6 6 0 0112 0v2" /></svg></div>
+                    <span class="nlbl">Motorista</span>
+                    <svg class="narr" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg>
+                </div>
+                <div class="sm" id="sm1">
+                    <div class="smi">
+                        <div class="si" onclick="location.href='@Url.Action("Index", "Motorista")'">
+                            Cadastro de Motorista
+                        </div>
+
+                        <div class="si" onclick="location.href='@Url.Action("ConsultarMotoristasComViagens", "Motorista")'">
+                            Histórico de Viagens Realizadas
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ni" id="ni2" onclick="tog(this,'sm2')">
+                    <div class="niw"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2" /><path d="M16 8h4l3 5v3h-7V8z" /><circle cx="5.5" cy="18.5" r="2.5" /><circle cx="18.5" cy="18.5" r="2.5" /></svg></div>
+                    <span class="nlbl">Veículos</span>
+                    <svg class="narr" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg>
+                </div>
+                <div class="sm" id="sm2">
+                    <div class="smi">
+                    <div class="si" onclick="location.href='@Url.Action("Index", "Veiculo")'">Cadastro de Veículos</div>
+                        
+                    </div>
+                </div>
+
+                <div class="ni" id="ni3" onclick="tog(this,'sm3')">
+                    <div class="niw"><svg viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h12" /><circle cx="19" cy="18" r="2" /></svg></div>
+                    <span class="nlbl">Viagens</span>
+                    
+                    <svg class="narr" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg>
+                </div>
+                <div class="sm" id="sm3">
+                    <div class="smi">
+                        <div class="si" onclick="location.href='@Url.Action("Index", "Viagens")'">Cadastro de Viagens</div>
+                        
+                    </div>
+                </div>
+
+                <div class="ndiv"></div>
+            </nav>
+
+            <div class="nb">
+                <div class="nbi" onclick="tgTheme()">
+                    <div class="niw" style="background:rgba(124,58,237,.12);color:var(--accent)">
+                        <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" /></svg>
+                    </div>
+                    <span class="nbl">Modo Noturno</span>
+                    <div class="tpill on" id="tp"></div>
+                </div>
+                <div class="nbi exit-i" onclick="if(confirm('Deseja sair?'))alert('Sessão encerrada.')">
+                    <div class="niw" style="background:rgba(239,68,68,.1);color:#ef4444">
+                        <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" y1="12" x2="9" y2="12" /></svg>
+                    </div>
+                    <span class="nbl">Sair do sistema</span>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+        </aside>
+
+
+        <!-- MAIN -->
+        <div class="main">
+
+            <div class="topbar">
+                <button class="hbtn" onclick="tgSidebar()">
+                    <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="21" y2="18" /></svg>
+                </button>
+                <div class="ptitle" id="ptitle">🏠 Início <em>/ Dashboard</em></div>
+                
+            </div>
+
+            <div class="content" id="ct">
+                @RenderBody()
+            </div>
+        </div>
 
     
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
-</body>
+
+        
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+          
+
+        
+        @await RenderSectionAsync("Scripts", required: false)
+
+    </body>
+
+
 </html>
+
+
+

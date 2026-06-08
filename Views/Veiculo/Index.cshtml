@@ -1,0 +1,141 @@
+﻿@using BusControl.Dto
+@using BusControl.Models
+@model IEnumerable<VeiculoModel>
+
+@{
+    var categoria = ViewBag.categoria?.ToString();
+    bool IsSelected(string value) => categoria == value;
+}
+
+<div class="card">
+
+    <div class="chd">
+        <div class="ctitle">
+            <div class="cico">🪪</div>
+            Consulta de Veiculos
+        </div>
+    </div>
+
+    <form method="get" asp-controller="Veiculo" asp-action="Index">
+
+        <div class="filter-grid">
+
+            <div class="field">
+                <label>Nome do Veiculo</label>
+                <input value="@ViewBag.nome" type="text" name="nome" placeholder="Digite o nome..." />
+            </div>
+
+            <div class="field">
+                <label>Placa do Veiculo</label>
+                <input value="@ViewBag.placa" type="text" name="placa" placeholder="Digite a placa do veiculo..." />
+            </div>
+
+            <div class="field">
+                <label>Categoria</label>
+                <select name="categoria">
+                    <option value="" selected="@(string.IsNullOrEmpty(categoria))">Todos</option>
+                    <option value="1" selected="@(IsSelected("1"))">Luxo</option>
+                    <option value="2" selected="@(IsSelected("2"))">Normal</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="actions-bar">
+
+            <button type="submit" class="btn btn-p">
+                🔍 Pesquisar
+            </button>
+
+            <button type="button"
+                    class="btn btn-p"
+                    onclick="abrirModalVeiculo()">
+                ➕ Novo Veiculo
+            </button>
+
+            <button type="button"
+                    class="btn btn-g"
+                    onclick="limparFiltros()">
+                🧹 Limpar
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+<div class="card">
+
+    <div class="table-wrap">
+
+        <table class="tbl">
+
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Placa</th>
+                    <th>Marca</th>
+                    <th>Categoria</th>
+                    <th class="text-center">Ações</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @if (Model != null && Model.Any())
+                {
+                    @foreach (var veiculo in Model)
+                    {
+                        <tr>
+
+                            <td>@veiculo.nomeVeiculo</td>
+                            <td>@veiculo.placaVeiculo</td>
+                            <td>@veiculo.marcaVeiculo</td>
+                            <td>@veiculo.categoria</td>
+
+                            <td>
+                                <div class="table-actions">
+                                    <button class="action-btn edit">
+                                        ✏️
+                                    </button>
+
+                                    <button type="button" class="action-btn delete" onclick="ExcluirVeiculo(@veiculo.id)">
+                                        🗑️
+                                    </button>
+                                </div>
+
+                            </td>
+
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="10" class="text-center">
+                            Nenhum veiculo encontrado.
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+
+
+@section Scripts
+{
+
+    <script src="~/js/veiculo.js"></script>
+}
+
+
+
+@await Html.PartialAsync("_ModalCadastrarVeiculo", new VeiculoRegisterDto())
