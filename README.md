@@ -55,7 +55,8 @@ Segue algumas telas feitas
 <img width="493" height="613" alt="Captura de tela 2026-06-07 233613" src="https://github.com/user-attachments/assets/2b575c31-23ea-4042-97f7-4518361ccf91" />
 <img width="491" height="614" alt="Captura de tela 2026-06-07 233604" src="https://github.com/user-attachments/assets/7e43fb36-3ac0-4e12-a1ca-c1a3f8c8034a" />
 <img width="1919" height="994" alt="Captura de tela 2026-06-07 233525" src="https://github.com/user-attachments/assets/6029cd48-9222-4066-945b-edef3fd1b05e" />
-<img width="1919" height="970" alt="Captura de tela 2026-06-07 212205" src="https://github.com/user-attachments/assets/cbf72cd0-dbd5-44f7-849d-0eece6165fdf" />
+<img width="1919" height="994" alt="Captura de tela 2026-06-07 234654" src="https://github.com/user-attachments/assets/f837a4cd-4398-4d82-9a0e-ba0de37fd163" />
+
 
 
 ## Autor
